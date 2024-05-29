@@ -1,6 +1,10 @@
 # Untracked files in MPLABX projects
 /**/build/*
+/**/queuelogs/*
 /**/nbproject/*
 !/**/nbproject/*.xml
 /**/dist/*
 /**/.generated_files/*
+
+*.bak*
+*.yml
