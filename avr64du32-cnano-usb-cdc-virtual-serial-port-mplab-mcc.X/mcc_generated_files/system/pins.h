@@ -38,6 +38,44 @@
 #include <avr/io.h>
 #include "./port.h"
 
+//get/set VBUS aliases
+#define VBUS_SetHigh() do { PORTC_OUTSET = 0x8; } while(0)
+#define VBUS_SetLow() do { PORTC_OUTCLR = 0x8; } while(0)
+#define VBUS_Toggle() do { PORTC_OUTTGL = 0x8; } while(0)
+#define VBUS_GetValue() (VPORTC.IN & (0x1 << 3))
+#define VBUS_SetDigitalInput() do { PORTC_DIRCLR = 0x8; } while(0)
+#define VBUS_SetDigitalOutput() do { PORTC_DIRSET = 0x8; } while(0)
+#define VBUS_SetPullUp() do { PORTC_PIN3CTRL  |= PORT_PULLUPEN_bm; } while(0)
+#define VBUS_ResetPullUp() do { PORTC_PIN3CTRL  &= ~PORT_PULLUPEN_bm; } while(0)
+#define VBUS_SetInverted() do { PORTC_PIN3CTRL  |= PORT_INVEN_bm; } while(0)
+#define VBUS_ResetInverted() do { PORTC_PIN3CTRL  &= ~PORT_INVEN_bm; } while(0)
+#define VBUS_DisableInterruptOnChange() do { PORTC.PIN3CTRL = (PORTC.PIN3CTRL & ~PORT_ISC_gm) | 0x0 ; } while(0)
+#define VBUS_EnableInterruptForBothEdges() do { PORTC.PIN3CTRL = (PORTC.PIN3CTRL & ~PORT_ISC_gm) | 0x1 ; } while(0)
+#define VBUS_EnableInterruptForRisingEdge() do { PORTC.PIN3CTRL = (PORTC.PIN3CTRL & ~PORT_ISC_gm) | 0x2 ; } while(0)
+#define VBUS_EnableInterruptForFallingEdge() do { PORTC.PIN3CTRL = (PORTC.PIN3CTRL & ~PORT_ISC_gm) | 0x3 ; } while(0)
+#define VBUS_DisableDigitalInputBuffer() do { PORTC.PIN3CTRL = (PORTC.PIN3CTRL & ~PORT_ISC_gm) | 0x4 ; } while(0)
+#define VBUS_EnableInterruptForLowLevelSensing() do { PORTC.PIN3CTRL = (PORTC.PIN3CTRL & ~PORT_ISC_gm) | 0x5 ; } while(0)
+#define PC3_SetInterruptHandler VBUS_SetInterruptHandler
+
+//get/set LED aliases
+#define LED_SetHigh() do { PORTF_OUTSET = 0x2; } while(0)
+#define LED_SetLow() do { PORTF_OUTCLR = 0x2; } while(0)
+#define LED_Toggle() do { PORTF_OUTTGL = 0x2; } while(0)
+#define LED_GetValue() (VPORTF.IN & (0x1 << 1))
+#define LED_SetDigitalInput() do { PORTF_DIRCLR = 0x2; } while(0)
+#define LED_SetDigitalOutput() do { PORTF_DIRSET = 0x2; } while(0)
+#define LED_SetPullUp() do { PORTF_PIN1CTRL  |= PORT_PULLUPEN_bm; } while(0)
+#define LED_ResetPullUp() do { PORTF_PIN1CTRL  &= ~PORT_PULLUPEN_bm; } while(0)
+#define LED_SetInverted() do { PORTF_PIN1CTRL  |= PORT_INVEN_bm; } while(0)
+#define LED_ResetInverted() do { PORTF_PIN1CTRL  &= ~PORT_INVEN_bm; } while(0)
+#define LED_DisableInterruptOnChange() do { PORTF.PIN1CTRL = (PORTF.PIN1CTRL & ~PORT_ISC_gm) | 0x0 ; } while(0)
+#define LED_EnableInterruptForBothEdges() do { PORTF.PIN1CTRL = (PORTF.PIN1CTRL & ~PORT_ISC_gm) | 0x1 ; } while(0)
+#define LED_EnableInterruptForRisingEdge() do { PORTF.PIN1CTRL = (PORTF.PIN1CTRL & ~PORT_ISC_gm) | 0x2 ; } while(0)
+#define LED_EnableInterruptForFallingEdge() do { PORTF.PIN1CTRL = (PORTF.PIN1CTRL & ~PORT_ISC_gm) | 0x3 ; } while(0)
+#define LED_DisableDigitalInputBuffer() do { PORTF.PIN1CTRL = (PORTF.PIN1CTRL & ~PORT_ISC_gm) | 0x4 ; } while(0)
+#define LED_EnableInterruptForLowLevelSensing() do { PORTF.PIN1CTRL = (PORTF.PIN1CTRL & ~PORT_ISC_gm) | 0x5 ; } while(0)
+#define PF1_SetInterruptHandler LED_SetInterruptHandler
+
 /**
  * @ingroup  pinsdriver
  * @brief GPIO and peripheral I/O initialization
@@ -45,4 +83,46 @@
  * @return none
  */
 void PIN_MANAGER_Initialize();
+
+/**
+ * @ingroup  pinsdriver
+ * @brief Default Interrupt Handler for VBUS pin. 
+ *        This is a predefined interrupt handler to be used together with the VBUS_SetInterruptHandler() method.
+ *        This handler is called every time the VBUS ISR is executed. 
+ * @pre PIN_MANAGER_Initialize() has been called at least once
+ * @param none
+ * @return none
+ */
+void VBUS_DefaultInterruptHandler(void);
+
+/**
+ * @ingroup  pinsdriver
+ * @brief Interrupt Handler Setter for VBUS pin input-sense-config functionality.
+ *        Allows selecting an interrupt handler for VBUS at application runtime
+ * @pre PIN_MANAGER_Initialize() has been called at least once
+ * @param InterruptHandler function pointer.
+ * @return none
+ */
+void VBUS_SetInterruptHandler(void (* interruptHandler)(void)) ; 
+
+/**
+ * @ingroup  pinsdriver
+ * @brief Default Interrupt Handler for LED pin. 
+ *        This is a predefined interrupt handler to be used together with the LED_SetInterruptHandler() method.
+ *        This handler is called every time the LED ISR is executed. 
+ * @pre PIN_MANAGER_Initialize() has been called at least once
+ * @param none
+ * @return none
+ */
+void LED_DefaultInterruptHandler(void);
+
+/**
+ * @ingroup  pinsdriver
+ * @brief Interrupt Handler Setter for LED pin input-sense-config functionality.
+ *        Allows selecting an interrupt handler for LED at application runtime
+ * @pre PIN_MANAGER_Initialize() has been called at least once
+ * @param InterruptHandler function pointer.
+ * @return none
+ */
+void LED_SetInterruptHandler(void (* interruptHandler)(void)) ; 
 #endif /* PINS_H_INCLUDED */

@@ -34,6 +34,8 @@
 
 #include "../pins.h"
 
+static void (*VBUS_InterruptHandler)(void);
+static void (*LED_InterruptHandler)(void);
 
 void PIN_MANAGER_Initialize()
 {
@@ -48,7 +50,7 @@ void PIN_MANAGER_Initialize()
     PORTA.DIR = 0x0;
     PORTC.DIR = 0x0;
     PORTD.DIR = 0x0;
-    PORTF.DIR = 0x0;
+    PORTF.DIR = 0x2;
 
   /* PINxCTRL registers Initialization */
     PORTA.PIN0CTRL = 0x0;
@@ -62,7 +64,7 @@ void PIN_MANAGER_Initialize()
     PORTC.PIN0CTRL = 0x0;
     PORTC.PIN1CTRL = 0x0;
     PORTC.PIN2CTRL = 0x0;
-    PORTC.PIN3CTRL = 0x0;
+    PORTC.PIN3CTRL = 0x4;
     PORTC.PIN4CTRL = 0x0;
     PORTC.PIN5CTRL = 0x0;
     PORTC.PIN6CTRL = 0x0;
@@ -94,8 +96,36 @@ void PIN_MANAGER_Initialize()
     PORTMUX.USARTROUTEA = 0x0;
 
   // register default ISC callback functions at runtime; use these methods to register a custom function
+    VBUS_SetInterruptHandler(VBUS_DefaultInterruptHandler);
+    LED_SetInterruptHandler(LED_DefaultInterruptHandler);
 }
 
+/**
+  Allows selecting an interrupt handler for VBUS at application runtime
+*/
+void VBUS_SetInterruptHandler(void (* interruptHandler)(void)) 
+{
+    VBUS_InterruptHandler = interruptHandler;
+}
+
+void VBUS_DefaultInterruptHandler(void)
+{
+    // add your VBUS interrupt custom code
+    // or set custom function using VBUS_SetInterruptHandler()
+}
+/**
+  Allows selecting an interrupt handler for LED at application runtime
+*/
+void LED_SetInterruptHandler(void (* interruptHandler)(void)) 
+{
+    LED_InterruptHandler = interruptHandler;
+}
+
+void LED_DefaultInterruptHandler(void)
+{
+    // add your LED interrupt custom code
+    // or set custom function using LED_SetInterruptHandler()
+}
 ISR(PORTA_PORT_vect)
 { 
     /* Clear interrupt flags */
@@ -104,6 +134,11 @@ ISR(PORTA_PORT_vect)
 
 ISR(PORTC_PORT_vect)
 { 
+    // Call the interrupt handler for the callback registered at runtime
+    if(VPORTC.INTFLAGS & PORT_INT3_bm)
+    {
+       VBUS_InterruptHandler(); 
+    }
     /* Clear interrupt flags */
     VPORTC.INTFLAGS = 0xff;
 }
@@ -116,6 +151,11 @@ ISR(PORTD_PORT_vect)
 
 ISR(PORTF_PORT_vect)
 { 
+    // Call the interrupt handler for the callback registered at runtime
+    if(VPORTF.INTFLAGS & PORT_INT1_bm)
+    {
+       LED_InterruptHandler(); 
+    }
     /* Clear interrupt flags */
     VPORTF.INTFLAGS = 0xff;
 }

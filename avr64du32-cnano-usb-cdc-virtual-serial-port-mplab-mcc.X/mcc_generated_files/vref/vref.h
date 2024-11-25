@@ -1,15 +1,13 @@
 /**
- * System Driver Header File
+ * VREF Generated Driver API Header File
  * 
- * @file system.h
+ * @file vref.h
  * 
- * @defgroup systemdriver System Driver
+ * @defgroup vref VREF
  * 
- * @brief This file contains the API prototype for the System Driver.
+ * @brief This file contains the API prototypes for the VREF module.
  *
- * @version Driver Version 1.0.2
- *
- * @version Package Version 4.2.14
+ * @version VREF Driver Version 1.0.0
 */
 /*
 © [2024] Microchip Technology Inc. and its subsidiaries.
@@ -33,36 +31,25 @@
 */
 
 
-#ifndef MCC_H
-#define	MCC_H
+#ifndef VREF_H_INCLUDED
+#define VREF_H_INCLUDED
+
+#include "../system/utils/compiler.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include "../system/utils/compiler.h"
-#include "config_bits.h"
-#include "../system/pins.h"
-#include "../usb/usb0.h"
-#include "../ac/ac0.h"
-#include "../timer/rtc.h"
-#include "../vref/vref.h"
-#include "../usb/usb_device.h"
-#include "../system/interrupt.h"
-#include "../system/clock.h"
-#include "../system/syscfg.h"
 /**
- * @ingroup systemdriver
- * @brief Initializes the System module. This routine is called only once during system initialization, before calling any other API.
+ * @ingroup vref
+ * @brief Initializes the VREF module.
  * @param None.
- * @return None.
-*/
-void SYSTEM_Initialize(void);
+ * @retval 0 - VREF is initialized successfully.
+ */
+int8_t VREF_Initialize(void);
 
 #ifdef __cplusplus
 }
 #endif
-#endif	/* MCC_H */
-/**
- End of File
-*/
+
+#endif /* VREF_H_INCLUDED */
