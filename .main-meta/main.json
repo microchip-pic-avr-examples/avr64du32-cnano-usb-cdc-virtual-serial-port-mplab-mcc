@@ -4,7 +4,7 @@
     "content": {
         "metaDataVersion": "1.3.0",
         "name": "com.microchip.mcu8.mplabx.project.avr64du32-cnano-usb-cdc-virtual-serial-port-mplab-mcc",
-        "version": "1.0.0",
+        "version": "1.0.1",
         "displayName": "USB CDC Virtual Serial Port using AVR DU Microcontroller",
         "projectName": "avr64du32-cnano-usb-cdc-virtual-serial-port-mplab-mcc",
         "shortDescription": "This code example demonstrates the Virtual Serial functionality of the Communication Device Class (CDC) using the USB 2.0 device peripheral on the AVR DU family of MCUs.",
@@ -15,12 +15,12 @@
         "compiler": [
             {
                 "name": "XC8",
-                "semverRange": "^2.46.0"
+                "semverRange": "^2.50.0"
             }
         ],
         "dfp": {
             "name": "AVR-Dx_DFP",
-            "semverRange": "^2.4.286"
+            "semverRange": "^2.6.303"
         },
         "configurator": {
             "name": "MCC",
