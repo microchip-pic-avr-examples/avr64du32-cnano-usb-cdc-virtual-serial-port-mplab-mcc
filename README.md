@@ -26,6 +26,8 @@ This example shows how to communicate between the AVR DU microcontroller and a h
 ### Physical Setup
 The AVR DU Curiosity Nano Development Board has two USB-C® ports. One for programming the device via the on-board debugger and one connected directly to the AVR DU. While programming the device over the AVR DU's port is possible using bootloaders, this example uses the debugger port so both ports needs to be connected to the host computer. After programming, only the AVR DU side needs to continue being connected.
 
+The Curiosity Nano has an Adjustable Target Regulator that regulates voltage to 3.3V by default. Since the USB peripheral in the AVR64DU32 needs to run at 3.3V, it either needs a 3.3V supply connected on the VUSB pin or a 5.0V supply on VDD with the internal USB Voltage Regulator active. With the Curiosity Nano default settings, the VBUS pinheader on the board must be connected with the included jumper to supply 3.3V directly to VUSB.
+
 ### MCC Project Setup
 This section shows how the example is set up in MPLAB using MCC. An overview of the complete MCC setup is shown in the image below:
 <p><img src="images/mcc_overview.jpg" width="600"/></p>
@@ -80,13 +82,13 @@ In the V<sub>REF</sub> peripheral, the Voltage Reference is set to 2.048V.
 #### Analog Comparator Setup (AC)
 The Analog Comparator must be enabled by toggling Enable under Hardware Settings.
 
-The positive input is set to the USB DETECT pin on the Curiosity Nano which is connected to Positive Pin 4 on the AC by default. The detection threshold is set using the Digital-to-Analog Comparator (DAC) reference (DACREF) which is selected as the negative input to the AC.
+The positive input is set to the USB DETECT pin on the Curiosity Nano which is connected to Positive Pin 4 on the AC by default. The detection threshold is set using the internal reference voltage generator (DACREF) which is selected as the negative input to the AC.
 
 To calculate the DACREF, use the formula from the data sheet:
 
 *V_DACREF = (DACREF / 256) * V_REF*
 
-If the desired threshold known, the built-in Requested Voltage feature of MCC can calculate it automatically. Due to the voltage divider present on the Curiosity Nano, a threshold of 0.32V is needed for this project. Inputting this value into the Requested Voltage field will populate the DACREF value.
+Due to the voltage divider present on the Curiosity Nano, a threshold of 0.32V is needed for this project. Inputting this value into the Requested Voltage field in MCC can calculate the DACREF value automatically.
 
 Refer to the [AVR64DU32 Curiosity Nano User Guide](https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/UserGuides/AVR64DU32-Curiosity-Nano-UserGuide-DS50003671.pdf) for more information on how the *USB DETECT* is implemented on the Curiosity Nano.
 
@@ -103,7 +105,7 @@ The RTC is configured to run on a 1 kHz clock with no prescaler.
 The PIT is then set to trigger at every 32 clock cycles of the RTC clock. this gives an update rate of ~31 Hz.
 <p><img src="images/mcc_rtc_interrupt_settings.jpg" width="500"/></p>
 
-The application is set up to need five stable voltage readings before initiating the USB communication. This means that, with no voltage fluctuations and the settings above, the start-up time will be in the 0.16 s range.
+The application is set up to need five stable voltage readings before initiating the USB communication. This means that, with no voltage fluctuations and the settings above, the start-up time will be in the 0.16s range.
 
 ### LED Setup
 The on-board LED of the Curiosity Nano is used to indicate if the USB communications has failed. The LED is connected to the PF1 pin and can be selected as an output in the Pin Grid View below.
@@ -132,7 +134,7 @@ The USB part of the application is set up in polling mode and therefore needs to
 When the device is programmed, it will show up as a Virtual Serial Port on the host. The method varies between operating systems and the most common cases are listed below. As MPLAB Data Visualizer is used in this example, the appropriate serial ports will show up directly in the program.
 
 #### Windows®
-In Windows, the easiest way to identify the port number is to go to Device Manager>Ports (COM and LPT) to easily identify the port number.. The device shows up as USB Serial Device (COM##), where ## is the number assigned by the host.
+In Windows, the easiest way to identify the port number is to go to *Device Manager>Ports (COM and LPT)* to easily identify the port number.. The device shows up as USB Serial Device (COM##), where ## is the number assigned by the host.
 
 Alternatively, the following commands will also list the devices in terminal.
 
