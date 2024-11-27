@@ -2,7 +2,7 @@
 
 [![MCHP](images/microchip.png)](https://www.microchip.com)
 
-# USB CDC Virtual Serial Port using AVR® DU Microcontroller
+# USB CDC Virtual Serial Port Using AVR® DU Microcontroller
 This example shows how to communicate between the AVR DU microcontroller and a host computer using the USB Communication Device Class (CDC). In addition to an application that will work with standard terminal applications, a python script is included showing how to easily interface with the AVR DU over CDC.
 
 ## Related Documentation
@@ -11,11 +11,11 @@ This example shows how to communicate between the AVR DU microcontroller and a h
 - [USB CDC Specification](https://www.usb.org/document-library/class-definitions-communication-devices-12)
 
 ## Software Used
-- MPLAB® X IDE 6.20.0 or newer [(MPLAB® X IDE 6.20)](https://www.microchip.com/en-us/tools-resources/develop/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_AVR-DU&utm_content=avr64du32-cnano-usb-cdc-virtual-serial-port-mplab-mcc-github&utm_bu=MCU08)
-- MPLAB® XC8 2.46.0 or newer compiler [(MPLAB® XC8 2.46)](https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_AVR-DU&utm_content=avr64du32-cnano-usb-cdc-virtual-serial-port-mplab-mcc-github&utm_bu=MCU08)
-- MPLAB® Code Configurator (MCC) plugin 5.5.0 or newer [(MPLAB® Code Configurator 5.5.0)](https://www.microchip.com/en-us/tools-resources/configure/mplab-code-configurator?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_AVR-DU&utm_content=avr64du32-cnano-usb-cdc-virtual-serial-port-mplab-mcc-github&utm_bu=MCU08)
-- MPLAB® Data Visualizer 1.3.1335 or newer [(MPLAB Data Visualizer v1.3.1665)](https://www.microchip.com/en-us/tools-resources/debug/mplab-data-visualizer)
-- Python 3.11.0 or newer [Python](https://www.python.org/)
+- [MPLAB® X IDE 6.20.0](https://www.microchip.com/en-us/tools-resources/develop/mplab-x-ide?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_AVR-DU&utm_content=avr64du32-cnano-usb-cdc-virtual-serial-port-mplab-mcc-github&utm_bu=MCU08) or newer
+- [MPLAB® XC8 2.46.0](https://www.microchip.com/en-us/tools-resources/develop/mplab-xc-compilers?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_AVR-DU&utm_content=avr64du32-cnano-usb-cdc-virtual-serial-port-mplab-mcc-github&utm_bu=MCU08) or newer compiler
+- [MPLAB® Code Configurator(MCC) v5.5.0](https://www.microchip.com/en-us/tools-resources/configure/mplab-code-configurator?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_AVR-DU&utm_content=avr64du32-cnano-usb-cdc-virtual-serial-port-mplab-mcc-github&utm_bu=MCU08) plug-in or newer
+- [MPLAB Data Visualizer v1.3.1665](https://www.microchip.com/en-us/tools-resources/debug/mplab-data-visualizer) or newer 
+- [Python 3.11.0](https://www.python.org/) or newer
 
 ## Hardware Used
 - [AVR64DU32](https://www.microchip.com/en-us/product/AVR64DU32?utm_source=GitHub&utm_medium=TextLink&utm_campaign=MCU8_AVR-DU&utm_content=avr64du32-cnano-usb-cdc-virtual-serial-port-mplab-mcc-github&utm_bu=MCU08)
@@ -24,25 +24,25 @@ This example shows how to communicate between the AVR DU microcontroller and a h
 ## Setup
 
 ### Physical Setup
-The AVR DU Curiosity Nano Development Board has two USB-C ports. One for programming the device via the onboard debugger and one connected directly to the AVR DU. While programming the device over the AVR DU's port is possible using bootloaders, this example uses the debugger port so both ports needs to be connected to the host computer. After programming only the AVR DU side needs to continue being connected.
+The AVR DU Curiosity Nano Development Board has two USB-C® ports. One for programming the device via the on-board debugger and one connected directly to the AVR DU. While programming the device over the AVR DU's port is possible using bootloaders, this example uses the debugger port so both ports needs to be connected to the host computer. After programming, only the AVR DU side needs to continue being connected.
 
 ### MCC Project Setup
-This section shows how the example is set up in MPLAB using MCC. An overview of the MCC setup when completed is shown in the image below:
+This section shows how the example is set up in MPLAB using MCC. An overview of the complete MCC setup is shown in the image below:
 <p><img src="images/mcc_overview.jpg" width="600"/></p>
 
-1. Start a new Microchip Embedded Standalone Project in MPLAB selecting the AVR DU as your device.
-2. Open MCC to start setting up the US
-    * If the USB library doesn’t show up in Libraries under Device Resources (By default on the left in MPLAB) it needs to be added in the Content Manager menu. The button is in the Device Resources section or under Tools in the menu
-3. Add the USB Device Stack library to the project
-4. Add the AC0, RTC and VREF drivers to the project
-5. Follow the setup below to configure the library and drivers
+1. Start a new Microchip Embedded Application Project in MPLAB, selecting the AVR DU as your device.
+2. Open MCC to start setting up the USB Device Stack:
+    * If the USB library doesn’t show up in Libraries under Device Resources (By default on the left in MPLAB) it needs to be added in the Content Manager menu. The button is in the Device Resources section or under Tools in the menu.
+3. Add the USB Device Stack library to the project.
+4. Add the AC0, RTC and VREF drivers to the project.
+5. Follow the setup below to configure the library and drivers.
 
 #### USB General Settings
 The configurator is set so that the AVR DU will identify as a CDC device on the highest level. The toggle switch for adding the Virtual Serial example code is also enabled.
 <p><img src="images/mcc_usb_general_settings.jpg" width="500"/></p>
 
 #### USB Device Descriptors
-For this example the Device Descriptors section is left as default. For other applications, information on the product can be added here.
+For this example, the Device Descriptors section is left as default. For other applications, information on the product can be added here.
 <p><img src="images/mcc_usb_device_descriptors.jpg" width="500"/></p>
 
 #### USB Interfaces
@@ -50,25 +50,25 @@ For this example, both a communication and data interface are required.
 <p><img src="images/mcc_usb_interfaces.jpg" width="500"/></p>
 
 #### USB CDC Communication Interface
-The communication interface is the one that sets up how the communication flows in the setup. The Abstract Control Model (ACM) is used as a subclass but few of the supported commands are needed. Three Functional Descriptors are also required:
+The communication interface determines how the communication flow between the host and device. The Abstract Control Model (ACM) is used as a subclass but few of the supported commands are needed. Three Functional Descriptors are also required:
 * Header - Required for Functional Descriptors
-* ACM - Tells the host what commands the device supports (D1 indicates that device supports basic *Line Coding* and *Control Line State* commands needed for terminal applications)
-* Union - Tells the host the relationship between two or more interface
+* ACM - Tells the host what commands the device supports (D1 indicates that device supports basic Line Coding and Control Line State commands needed for terminal applications)
+* Union - Tells the host the relationship between two or more interfaces
 <p><img src="images/mcc_usb_interface_comm.jpg" width="500"/></p>
 
 ### USB CDC Data Interface
-All communication is sent over the data interface for this basic Virtual Serial Port application. The Packet Size field determines how much data can be transmitted in one USB packet. The data sent can be bigger or smaller and the stack will transmit less or split it up in smaller packages.
+All communication is sent over the data interface for this basic Virtual Serial Port application. The Packet Size field determines how much data can be transmitted in one USB packet. The data sent can be bigger or smaller and the stack will transmit a less amount or split it up in smaller packages.
 <p><img src="images/mcc_usb_interface_data.jpg" width="500"/></p>
 
 ### Device Clock Setup
 This example is configured to run on 24 MHz. The minimum oscillator frequency for USB on the AVR DU is 12 MHz.
 <p><img src="images/mcc_clock_control.jpg" width="500"/></p>
 
-The application uses a delay function to blink a LED if the USB connection fails. This delay function is dependent on knowing the main clock speed through the F_CPU define. In this project it has been set up as a preprocessed define macro in the project settings as seen in the image below. 
+The application uses a delay function to blink an LED if the USB connection fails. This delay function is dependent on knowing the main clock speed through the F_CPU define. Here, this has been set up as a preprocessed define macro in the project settings, as seen in the image below.
 
 <p><img src="images/mplab_macros.jpg" width="500"/></p>
 
-Alternatively it could have been added in the main file as `#define F_CPU 24000000UL` above the delay include.
+Alternatively, it could have been added in the main file as `#define F_CPU 24000000UL` above the `#include <util/delay.h>` line.
 
 ### USB Voltage Detection Setup
 To ensure that the USB peripheral only tries to attach to the bus when the Curiosity Nano is connected to the PC, the Analog Comparator will periodically check if the voltage is within the acceptable range for V<sub>BUS</sub>.
@@ -80,13 +80,13 @@ In the V<sub>REF</sub> peripheral, the Voltage Reference is set to 2.048V.
 #### Analog Comparator Setup (AC)
 The Analog Comparator must be enabled by toggling Enable under Hardware Settings.
 
-The positive input is set to the USB DETECT pin on the curiosity nano which is connected to Positive Pin 4 on the AC by default. The detection threshold is set using the Digital-to-Analog Comparator (DAC) reference (DACREF) which is selected as the negative input to the AC.
+The positive input is set to the USB DETECT pin on the Curiosity Nano which is connected to Positive Pin 4 on the AC by default. The detection threshold is set using the Digital-to-Analog Comparator (DAC) reference (DACREF) which is selected as the negative input to the AC.
 
-To calculate the DACREF value we can use the formula from the datasheet:
+To calculate the DACREF, use the formula from the data sheet:
 
 *V_DACREF = (DACREF / 256) * V_REF*
 
-If we know the threshold we want, we can use the built in-feature of MCC to do it for us. We want to use the value 0.32V as a threshold due to the voltage divider implemented on the Curiosity Nano. Inputting this value into the Requested Voltage field will populate the DACREF value.
+If the desired threshold known, the built-in Requested Voltage feature of MCC can calculate it automatically. Due to the voltage divider present on the Curiosity Nano, a threshold of 0.32V is needed for this project. Inputting this value into the Requested Voltage field will populate the DACREF value.
 
 Refer to the [AVR64DU32 Curiosity Nano User Guide](https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/UserGuides/AVR64DU32-Curiosity-Nano-UserGuide-DS50003671.pdf) for more information on how the *USB DETECT* is implemented on the Curiosity Nano.
 
@@ -96,21 +96,21 @@ Refer to the [AVR64DU32 Curiosity Nano User Guide](https://ww1.microchip.com/dow
 The RTC Periodic Interrupt Timer (PIT) is used to trigger the voltage detection described above. 
 
 #### RTC Hardware Settings
-The RTC is configured to run on a 1kHz clock with no prescaler.
+The RTC is configured to run on a 1 kHz clock with no prescaler.
 <p><img src="images/mcc_rtc_hardware_settings.jpg" width="500"/></p>
 
 #### RTC Interrupt Settings
-The PIT is then set to trigger at every 32 clock cycles of the RTC clock. this gives an update rate of ~31Hz.
+The PIT is then set to trigger at every 32 clock cycles of the RTC clock. this gives an update rate of ~31 Hz.
 <p><img src="images/mcc_rtc_interrupt_settings.jpg" width="500"/></p>
 
-The application is set up to need 5 stable voltage readings before initiating USB communication. This means that, with no voltage fluctuations and the settings above, the startup time should be in the 0.16s range.
+The application is set up to need five stable voltage readings before initiating the USB communication. This means that, with no voltage fluctuations and the settings above, the start-up time will be in the 0.16 s range.
 
 ### LED Setup
-The onboard LED of the Curiosity Nano is used to indicate if USB communications has failed. The LED is connected to the PF1 pin and can be selected as an output in the Pin Grid View below.
+The on-board LED of the Curiosity Nano is used to indicate if the USB communications has failed. The LED is connected to the PF1 pin and can be selected as an output in the Pin Grid View below.
 
 <p><img src="images/mcc_pin_grid.jpg" width="600"/></p>
 
-The pin is given a custom name in the Pins menu as seen below. This makes the code easier to read with function generated using this name.
+The pin is given a custom name in the Pins menu, as seen below. This makes the code easier to read with function generated using this name.
 
 <p><img src="images/mcc_pin_naming.jpg" width="600"/></p>
 
@@ -126,15 +126,15 @@ The application checks if there is data in the received buffer and adds the data
 
 <p><img src="images/application_flow.jpg" width="500"/></p>
 
-The application is set up in polling mode and therefore needs to handle the USB peripheral inside the main loop. Interrupt mode can be selected in MCC which would simplify the application by removing the need for USB handler.
+The USB part of the application is set up in polling mode and therefore needs to handle the USB peripheral inside the main loop. Interrupt mode is also selectable in MCC and it simplifies the application by removing the need for USB handler.
 
 ### Identify Virtual Serial Port Number
-When the device is programmed it will show up as a Virtual Serial Port on the host. The method varies between operating systems and the most common methods are listed below. As MPLAB Data Visualizer is used in this example the appropriate serial ports will show up directly in the program.
+When the device is programmed, it will show up as a Virtual Serial Port on the host. The method varies between operating systems and the most common cases are listed below. As MPLAB Data Visualizer is used in this example, the appropriate serial ports will show up directly in the program.
 
-#### Windows
-In Windows, the easiest way to identify the port number is to go into *Device Manager* and look under *Ports (COM & LPT)*. The device would show up as *USB Serial Device (COM##)* where ## is the number assigned by the host.
+#### Windows®
+In Windows, the easiest way to identify the port number is to go to Device Manager>Ports (COM and LPT) to easily identify the port number.. The device shows up as USB Serial Device (COM##), where ## is the number assigned by the host.
 
-Alternatively the following commands will also list the devices in terminal.
+Alternatively, the following commands will also list the devices in terminal.
 
 Command Prompt:
 ```
@@ -146,8 +146,8 @@ PowerShell:
 Get-WMIObject Win32_SerialPort | Select-Object Name,DeviceID,Description
 ```
 
-#### Mac/Linux
-Using the terminal, a list of connected devices will show if the command below is used.
+#### macOS®  and Linux®
+Using the terminal, add the command below to generate a list of connected devices.
 
 ```
 ls /dev/tty.*
@@ -157,27 +157,27 @@ ls /dev/tty.*
 This section assumes that the setup has been followed and that the device is programmed and connected to the host.
 
 ### MPLAB Data Visualizer
-Step by step guide to open communication
-1. Open MPLAB Data Visualizer
-    * The Curiosity Nano should show up in the connection pane to the left side of the window
-2. Send the COM port to the terminal window
-    * While hovering over the Curiosity Nano COM port an option to "Display as text in the terminal" should appear
-    * Serial connection should now have started
+Step-by-step guide to open communication:
+1. Open MPLAB Data Visualizer:
+    * The Curiosity Nano will show up in the connection pane to the left side of the window
+2. Send the COM port to the terminal window:
+    * While hovering over the Curiosity Nano COM port, an option to "Display as text in the terminal" will appear
+    * Serial connection will now have started
 <p><img src="images/data_visualizer_capturing_serial.jpg" width="300"/></p>
 
-3. Write any input in the terminal window and it will echo back when enter is pressed
+3. Write any input in the terminal window and it will echo back when enter is pressed.
 <p><img src="images/data_visualizer_terminal_window.jpg" width="700"/></p>
 
-### Python Script
+### Python® Script
 Reading the USB CDC Virtual Serial Port data in a terminal isn't always the most useful way to access it. This section will demonstrate how to transmit and receive data using a Python script.
 
-In addition to basic packages included by the standard Python installation it also uses [pyserial](https://pypi.org/project/pyserial/) that needs to be installed separately.
+In addition to basic packages included by the standard Python installation, the script also uses [pyserial](https://pypi.org/project/pyserial/) that needs to be installed separately.
 
 ```
 pip install pyserial
 ```
 
-The included script is quite sparse and is only meant to show the basic functionality. While the AVR DU's USB port is connected and the device is programmed for the previous example, running the script is done using the following command:
+The included script is quite sparse and is only meant to show the basic functionality. While both Curiosity Nanos USB ports are connected and the device is programmed as described in the previous example, running the script is done using the following command:
 
 ```
 python usb_cdc_virtual_serial_port.py
@@ -191,7 +191,7 @@ Running the script will print a status message for trying to open the serial com
 Opening serial communication...
 ```
 
-When communication is established it will transmit a preset array of values to the AVR DU and print the following:
+When communication is established, it will transmit a preset array of values to the AVR DU and print the following:
 
 ```
 Transmitting Data:
@@ -205,9 +205,9 @@ Received Data:
 b'<data received as ASCII characters>'
 ```
 
-Python's `serial.read()` interprets the returned values as ASCII text, resulting in an array of chars instead of numbers. In the example script, this has been used directly but if the values are to be used in another format the read data must be converted.
+Python's `serial.read()` interprets the returned values as ASCII text, resulting in an array of chars instead of numbers. In the example script, this has been used directly, but if the values are to be used in another format, the read data must be converted.
 
-Finally the script will close the serial communication as not to hold up the device for other use.
+Finally, the script will close the serial communication as not to hold up the device for other use.
 
 ```
 Closing the serial communication.
