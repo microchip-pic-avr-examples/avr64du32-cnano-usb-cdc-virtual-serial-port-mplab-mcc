@@ -12,7 +12,7 @@
 */
 
 /*
-© [2024] Microchip Technology Inc. and its subsidiaries.
+© [2025] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
@@ -58,23 +58,23 @@
 #define PC3_SetInterruptHandler VBUS_SetInterruptHandler
 
 //get/set LED aliases
-#define LED_SetHigh() do { PORTF_OUTSET = 0x2; } while(0)
-#define LED_SetLow() do { PORTF_OUTCLR = 0x2; } while(0)
-#define LED_Toggle() do { PORTF_OUTTGL = 0x2; } while(0)
-#define LED_GetValue() (VPORTF.IN & (0x1 << 1))
-#define LED_SetDigitalInput() do { PORTF_DIRCLR = 0x2; } while(0)
-#define LED_SetDigitalOutput() do { PORTF_DIRSET = 0x2; } while(0)
-#define LED_SetPullUp() do { PORTF_PIN1CTRL  |= PORT_PULLUPEN_bm; } while(0)
-#define LED_ResetPullUp() do { PORTF_PIN1CTRL  &= ~PORT_PULLUPEN_bm; } while(0)
-#define LED_SetInverted() do { PORTF_PIN1CTRL  |= PORT_INVEN_bm; } while(0)
-#define LED_ResetInverted() do { PORTF_PIN1CTRL  &= ~PORT_INVEN_bm; } while(0)
-#define LED_DisableInterruptOnChange() do { PORTF.PIN1CTRL = (PORTF.PIN1CTRL & ~PORT_ISC_gm) | 0x0 ; } while(0)
-#define LED_EnableInterruptForBothEdges() do { PORTF.PIN1CTRL = (PORTF.PIN1CTRL & ~PORT_ISC_gm) | 0x1 ; } while(0)
-#define LED_EnableInterruptForRisingEdge() do { PORTF.PIN1CTRL = (PORTF.PIN1CTRL & ~PORT_ISC_gm) | 0x2 ; } while(0)
-#define LED_EnableInterruptForFallingEdge() do { PORTF.PIN1CTRL = (PORTF.PIN1CTRL & ~PORT_ISC_gm) | 0x3 ; } while(0)
-#define LED_DisableDigitalInputBuffer() do { PORTF.PIN1CTRL = (PORTF.PIN1CTRL & ~PORT_ISC_gm) | 0x4 ; } while(0)
-#define LED_EnableInterruptForLowLevelSensing() do { PORTF.PIN1CTRL = (PORTF.PIN1CTRL & ~PORT_ISC_gm) | 0x5 ; } while(0)
-#define PF1_SetInterruptHandler LED_SetInterruptHandler
+#define LED_SetHigh() do { PORTF_OUTSET = 0x4; } while(0)
+#define LED_SetLow() do { PORTF_OUTCLR = 0x4; } while(0)
+#define LED_Toggle() do { PORTF_OUTTGL = 0x4; } while(0)
+#define LED_GetValue() (VPORTF.IN & (0x1 << 2))
+#define LED_SetDigitalInput() do { PORTF_DIRCLR = 0x4; } while(0)
+#define LED_SetDigitalOutput() do { PORTF_DIRSET = 0x4; } while(0)
+#define LED_SetPullUp() do { PORTF_PIN2CTRL  |= PORT_PULLUPEN_bm; } while(0)
+#define LED_ResetPullUp() do { PORTF_PIN2CTRL  &= ~PORT_PULLUPEN_bm; } while(0)
+#define LED_SetInverted() do { PORTF_PIN2CTRL  |= PORT_INVEN_bm; } while(0)
+#define LED_ResetInverted() do { PORTF_PIN2CTRL  &= ~PORT_INVEN_bm; } while(0)
+#define LED_DisableInterruptOnChange() do { PORTF.PIN2CTRL = (PORTF.PIN2CTRL & ~PORT_ISC_gm) | 0x0 ; } while(0)
+#define LED_EnableInterruptForBothEdges() do { PORTF.PIN2CTRL = (PORTF.PIN2CTRL & ~PORT_ISC_gm) | 0x1 ; } while(0)
+#define LED_EnableInterruptForRisingEdge() do { PORTF.PIN2CTRL = (PORTF.PIN2CTRL & ~PORT_ISC_gm) | 0x2 ; } while(0)
+#define LED_EnableInterruptForFallingEdge() do { PORTF.PIN2CTRL = (PORTF.PIN2CTRL & ~PORT_ISC_gm) | 0x3 ; } while(0)
+#define LED_DisableDigitalInputBuffer() do { PORTF.PIN2CTRL = (PORTF.PIN2CTRL & ~PORT_ISC_gm) | 0x4 ; } while(0)
+#define LED_EnableInterruptForLowLevelSensing() do { PORTF.PIN2CTRL = (PORTF.PIN2CTRL & ~PORT_ISC_gm) | 0x5 ; } while(0)
+#define PF2_SetInterruptHandler LED_SetInterruptHandler
 
 /**
  * @ingroup  pinsdriver

@@ -7,12 +7,12 @@
  * 
  * @brief This file contains the API implementation for the System driver.
  *
- * @version Driver Version 1.0.2
+ * @version Driver Version 1.0.3
  *
- * @version Package Version 4.2.14
+ * @version Package Version 4.3.0
 */
 /*
-© [2024] Microchip Technology Inc. and its subsidiaries.
+© [2025] Microchip Technology Inc. and its subsidiaries.
 
     Subject to your compliance with these terms, you may use Microchip 
     software and any derivatives exclusively with Microchip products. 
