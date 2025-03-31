@@ -32,6 +32,8 @@ def main(serialPortNum):
         cdcSerial = serial.Serial(serialPortNum,115200,timeout=1)
     else:
         print("CDC Virtual Serial Port number error detected - Could not start serial communication")
+        print("\t 1. Make sure both the DEBUGGER and TARGET port are connected to the computer")
+        print("\t 2. Disconnect other AVR devices from the computer")
         sys.exit("Error occurred")
     
     # An array containing the message "Welcome to the AVR DU experience! USB connectivity on a modern AVR." in decimal ASCI
@@ -42,7 +44,7 @@ def main(serialPortNum):
     print(printHex(sentData))
     
     receivedData = cdcSerial.read(sentDataSize)
-    print("Received Data:")
+    print("\nReceived Data:")
     print(receivedData)
     
     print("Closing the serial communication.")
