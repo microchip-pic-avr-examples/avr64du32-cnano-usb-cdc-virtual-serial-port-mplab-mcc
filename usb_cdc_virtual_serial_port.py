@@ -36,7 +36,7 @@ def main(serialPortNum):
         print("\t 2. Disconnect other AVR devices from the computer")
         sys.exit("Error occurred")
     
-    # An array containing the message "Welcome to the AVR DU experience! USB connectivity on a modern AVR." in decimal ASCI
+    # An array containing the message "Welcome to the AVR DU experience! USB connectivity on a modern AVR." in decimal ASCII
     sentData = [87, 101, 108, 99, 111, 109, 101, 32, 116, 111, 32, 116, 104, 101, 32, 65, 86, 82, 32, 68, 85, 32, 101, 120, 112, 101, 114, 105, 101, 110, 99, 101, 33, 32, 85, 83, 66, 32, 99, 111, 110, 110, 101, 99, 116, 105, 118, 105, 116, 121, 32, 111, 110, 32, 97, 32, 109, 111, 100, 101, 114, 110, 32, 65, 86, 82, 46]
     sentDataSize = len(sentData)
     cdcSerial.write(sentData)

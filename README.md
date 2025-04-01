@@ -69,7 +69,7 @@ All communication is sent over the data interface for this basic Virtual Serial 
 This example is configured to run on 24 MHz. The minimum oscillator frequency for USB on the AVR DU is 12 MHz.
 <p><img src="images/mcc_clock_control.jpg" width="500"/></p>
 
-The application uses a delay function to blink an LED if the USB connection fails. This delay function is dependent on knowing the main clock speed through the F_CPU define. Here, this has been set up as a preprocessed define macro in the project settings.
+The application uses a delay function to blink an LED if the USB connection fails. This delay function is dependent on knowing the main clock speed through the F_CPU define. Here, this has been set up as a pre-processed define macro in the project settings.
 
 <p><img src="images/mplab_macros.jpg" width="500"/></p>
 
@@ -85,7 +85,7 @@ In the V<sub>REF</sub> peripheral, the Voltage Reference is set to 2.048V.
 #### Analog Comparator (AC) Setup
 The Analog Comparator is typically enabled by default under Hardware Settings.
 
-The positive input is set to the USB DETECT pin on the Curiosity Nano which is connected to Positive Pin 4 on the AC by default. The detection threshold is set using the internal reference voltage generator (DACREF) which is selected as the negative input to the AC.
+The positive input is set to the USB DETECT pin on the Curiosity Nano which is connected to positive pin 4 on the AC by default. The detection threshold is set using the internal reference voltage generator (DACREF) which is selected as the negative input to the AC.
 
 To calculate the DACREF, use the formula from the data sheet:
 
@@ -146,7 +146,7 @@ This example uses interrupts for both voltage monitoring and USART communication
 ## Application Flow
 The included MPLAB project is configured to echo back any data received over CDC.
 
-The application continuously checks if there is data in the CDC receive buffer and adds the data to the CDC transmit buffer, as long as the peripheral is ready and the buffer isn't full. The diagram bellow illustrates the complete flow of the main application.
+The application continuously checks if there is data in the CDC receive buffer and adds the data to the CDC transmit buffer, as long as the peripheral is ready and the buffer is not full. The diagram bellow illustrates the complete flow of the main application.
 
 <p><img src="images/application_flow.jpg" width="250"/></p>
 
